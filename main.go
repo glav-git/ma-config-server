@@ -56,7 +56,13 @@ func serveArchSh(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func serveBigBooties(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Location", "https://www.buzzfeed.com/lyapalater/spongebutts")
+	w.WriteHeader(http.StatusSeeOther)
+}
+
 func main() {
+	http.HandleFunc("GET /{$}", serveBigBooties)
 	http.HandleFunc("GET /arch.sh", serveArchSh)
 	log.Fatal(http.ListenAndServe(":"+mustEnv("PORT"), nil))
 }
